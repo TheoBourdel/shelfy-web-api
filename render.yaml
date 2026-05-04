@@ -1,0 +1,28 @@
+services:
+    - type: web
+      name: reading-saas-api
+      runtime: node
+      plan: free
+      buildCommand: npm ci && npm run build
+      startCommand: npm start
+      healthCheckPath: /health
+      envVars:
+          - key: NODE_ENV
+            value: production
+          - key: PORT
+            value: 4000
+          # Ces variables seront remplies via le dashboard Render (secrets)
+          - key: CORS_ORIGIN
+            sync: false
+          - key: SUPABASE_URL
+            sync: false
+          - key: SUPABASE_ANON_KEY
+            sync: false
+          - key: SUPABASE_SERVICE_ROLE_KEY
+            sync: false
+          - key: SUPABASE_JWT_SECRET
+            sync: false
+          - key: ISBNDB_API_KEY
+            sync: false
+          - key: ISBNDB_BASE_URL
+            value: https://api2.isbndb.com
